@@ -19,3 +19,7 @@ Rules:
 6. Never hand an agent an action that was blocked in Kai's own session; route it to the person with the exact command.
 
 `bin/kai-agent roles` installs the role definitions into `~/.claude/agents` once per Mac so `claude --agent <role>` finds them.
+
+## Squads
+
+For a project with more than one task at once: `bin/kai-agent squad <project> [--workers N]` (default 3) spawns `<project>-lead` on Opus with the `lead` role and `<project>-w1..N` builders on Sonnet in their own worktrees. Kai briefs the lead only (the project notes and the goal); the lead cuts tasks, assigns, reviews, and reports `ready: PR #n`; Kai verifies with `bin/kai-verify <n> --merge`. Start at three workers; the lead asks Kai for more with a reason. `bin/kai-agent squad-stop <project>` retires the squad.
